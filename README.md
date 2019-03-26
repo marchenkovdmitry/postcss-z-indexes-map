@@ -1,10 +1,8 @@
-# PostCSS Z Indexes Map [![Build Status][ci-img]][ci]
+# PostCSS Z Indexes Map
 
 [PostCSS] plugin to search all z-index values.
 
-[PostCSS]: https://github.com/postcss/postcss
-[ci-img]:  https://travis-ci.org/marchenkovdmitry/postcss-z-indexes-map.svg
-[ci]:      https://travis-ci.org/marchenkovdmitry/postcss-z-indexes-map
+[PostCSS]: https://github.com/postcss/postcss 
 
 Input:
 ```css
