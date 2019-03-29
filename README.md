@@ -56,4 +56,8 @@ z-indexes not found:
 postcss([ require('postcss-z-indexes-map') ])
 ```
 
+> ## Authors
+>The idea of Vyacheslav Efremenko https://github.com/brainsapiens \
+>Code by Dmitry Marchenkov https://github.com/marchenkovdmitry
+
 See [PostCSS] docs for examples for your environment.
