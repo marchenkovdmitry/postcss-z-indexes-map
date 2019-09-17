@@ -1,6 +1,6 @@
 {
   "name": "postcss-z-indexes-map",
-  "version": "1.0.4",
+  "version": "1.1.4",
   "description": "PostCSS plugin to search all z-index values",
   "keywords": [
     "postcss",

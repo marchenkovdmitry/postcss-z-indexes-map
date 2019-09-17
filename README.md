@@ -22,18 +22,6 @@ Input:
 
 Output without sort: 
 ```css
-.a {
-  z-index: 14;
-}
-
-.b {
-  z-index: 222;
-}
-
-.c {
-  z-index: 136;
-}
-
 /* 
  PostCSS z-indexes-map plugin. Start: 
  
@@ -49,18 +37,6 @@ Output without sort:
 
 Output with asc sort: 
 ```css
-.a {
-  z-index: 14;
-}
-
-.b {
-  z-index: 222;
-}
-
-.c {
-  z-index: 136;
-}
-
 /* 
  PostCSS z-indexes-map plugin. Start: 
  
@@ -76,18 +52,6 @@ Output with asc sort:
 
 Output with desc sort: 
 ```css
-.a {
-  z-index: 14;
-}
-
-.b {
-  z-index: 222;
-}
-
-.c {
-  z-index: 136;
-}
-
 /* 
  PostCSS z-indexes-map plugin. Start: 
  
@@ -112,25 +76,25 @@ Z-indexes not found:
 ```js
 const zIndexesMap = require('postcss-z-indexes-map');
 
-//without sort:
-
 postcss([
   zIndexesMap()
 ])
+```
 
-//with asc sort:
+## Options
 
-postcss([
+| Option | Type | Default | Values
+|---|---|---|---|
+| 1. sort | String | "" | "asc", "desc", "" 
+| 2. output | String | "console" | "console", "file" 
+
+```js
+// Example with asc sort and file output:
+
+postcss([ 
   zIndexesMap({
-    sort: 'asc'
-  })
-])
-
-//with desc sort:
-
-postcss([
-  zIndexesMap({
-    sort: 'desc'
+    sort: 'asc',
+    output: 'file'
   })
 ])
 ```

@@ -6,10 +6,11 @@ module.exports = postcss.plugin('postcss-z-indexes-map', function (opts) {
 
     let zIndexArr = [];
     let outputArr = [];
+    let isOptsDefine = typeof opts !== 'undefined' && opts !== null;
+    let outputString;
 
     root.walkRules(rule => {
       rule.walkDecls(decl => {
-
         if ( decl.prop === 'z-index') {
           zIndexArr.push({
             prop: decl.prop,
@@ -18,29 +19,24 @@ module.exports = postcss.plugin('postcss-z-indexes-map', function (opts) {
             startAt: `start at line ${decl.source.start.line}`,
           });
         }
-
       });
     });
 
-    if (opts !== undefined && opts !== null) {
-      if (opts.sort === 'asc') {
-        zIndexArr.sort(function(a, b) {return a.value - b.value});
-      } else if (opts.sort === 'desc') {
-        zIndexArr.sort(function(a, b) {return b.value - a.value});
-      }
-    }
+    isOptsDefine && opts.sort === 'asc' && zIndexArr.sort((a, b) => a.value - b.value);
+    isOptsDefine  && opts.sort === 'desc' && zIndexArr.sort((a, b) => b.value - a.value);
 
-    (zIndexArr.length !== 0) ? outputArr.push(`/* \n PostCSS z-indexes-map plugin. Start: \n`) : null;
+    zIndexArr.length !== 0 && outputArr.push(`/* \n PostCSS z-indexes-map plugin. Start: \n`);
 
     zIndexArr.forEach(function(item, i) {
       outputArr.push(`\n ${i+1} ${item.selector} { ${item.prop}: ${item.value}; } ${item.startAt}; \n`);
     });
 
-    (zIndexArr.length !== 0) ? outputArr.push(`\n PostCSS z-indexes-map plugin. End. \n*/`) : null;
+    zIndexArr.length !== 0 && outputArr.push(`\n PostCSS z-indexes-map plugin. End. \n*/`);
+    zIndexArr.length === 0 && outputArr.push(`/* PostCSS z-indexes-map plugin: z-indexes not found. */`);
 
-    (zIndexArr.length === 0) ? outputArr.push(`/* PostCSS z-indexes-map plugin: z-indexes not found. */`) : null;
-
-    root.append(outputArr.join(''));
+    outputString = outputArr.join('');
+    (typeof opts.output === 'undefined' || opts.output === 'console') && console.log(outputString);
+    opts.output === 'file' && root.append(outputString);
   };
 });
 
